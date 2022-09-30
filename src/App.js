@@ -1,3 +1,4 @@
+import { getElementError } from '@testing-library/react';
 import './App.scss';
 import { Wrapper } from './components/Wrapper'
 
@@ -16,16 +17,11 @@ var colors = [
   '#73A857'
 ];
 
-function getColor() {
-  Math.floor(Math.random() * colors.length);
-}
-
-let color = getColor()
-
+let color = colors[Math.floor(Math.random() * colors.length)];
 
 function App() {
   return (
-    <div className='App' style={{backgroundColor: color}}>
+    <div className='App' style={{backgroundColor: color, color: color }}>
       <Wrapper />
     </div>
   );
