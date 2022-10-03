@@ -3,12 +3,12 @@ import { QuoteText } from './QuoteText'
 import '../stylesheets/Wrapper.scss'
 
 
-export function Wrapper() {
+export function Wrapper({ color }) {
   return(
     <div id='wrapper' className='wrapper'>
       <div id='quote-box' className='quote-box'>
-        <QuoteText />
-        
+        <QuoteText
+        color={color} /> 
       </div>
     </div>
   )

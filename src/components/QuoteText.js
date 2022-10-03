@@ -1,11 +1,8 @@
 import '../stylesheets/QuoteText.scss'
-import React from 'react';
-import { FaQuoteLeft } from "react-icons/fa";
+import React, { useState } from 'react';
+import { FaQuoteLeft, FaTwitter } from "react-icons/fa";
 
-export function QuoteText() {
-
-  let currentQuote = '';
-  let currentAuthor = '';
+export function QuoteText({ color }) {
 
   let quotes = [  
   {
@@ -214,28 +211,45 @@ export function QuoteText() {
          "quote":"If you can dream it, you can achieve it.","author":"Zig Ziglar"}
   ];
 
-  function getRandomQuote() {
+  const [newQuote, setNewQuote] = useState({
+    currentQuote: '',
+    currentAuthor: ''
+  });
+
+  const getRandomQuote = () => {
     return quotes[Math.floor(Math.random() * quotes.length)]
   }
 
   function getQuote() {
     let randomQuote = getRandomQuote();
-
-    currentQuote = randomQuote.quote;
-    currentAuthor = randomQuote.author;
+    setNewQuote(newQuote.currentQuote = randomQuote.quote)
   }
+
   getQuote()
-  
+
   return (
     <>
       <div id='quote-text' className='quote-text'>
         <FaQuoteLeft />
-        <span id='text'>{currentQuote}</span>
+        <span id='text'>{newQuote.currentQuote}</span>
       </div>
       <div id="quote-author">
-        - <span id="author">{currentAuthor}</span>
+        - <span id="author">{newQuote.currentAuthor}</span>
+      </div>
+      <div className='buttons'>
+       <a 
+        className="button"
+        id="tweet-quote"
+        title="Tweet this quote!"
+        target="_blank"
+        rel="noreferrer"
+        style={{backgroundColor: color}}
+        href={'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' +
+        encodeURIComponent('"' + newQuote.currentQuote + '" ' + newQuote.currentAuthor)}>
+        <FaTwitter />
+        </a>
+        <button className="button" id="new-quote" style={{backgroundColor: color}} onClick={console.log(newQuote.currentQuote)}>New quote</button>
       </div>
     </>
   )
 }
-
