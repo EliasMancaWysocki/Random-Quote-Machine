@@ -1,5 +1,6 @@
 import React from 'react';
 import { QuoteText } from './QuoteText'
+import { Footer } from './Footer'
 import '../stylesheets/Wrapper.scss'
 
 
@@ -10,6 +11,7 @@ export function Wrapper({ color }) {
         <QuoteText
         color={color} /> 
       </div>
+      <Footer />
     </div>
   )
 }
