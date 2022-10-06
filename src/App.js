@@ -1,5 +1,5 @@
 import './App.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Wrapper } from './components/Wrapper'
 
 
@@ -22,10 +22,16 @@ function App() {
 
   let color = colors[Math.floor(Math.random() * colors.length)];
 
+  function changeColorBody() {
+    let body = document.getElementById('App');
+    body.animate({backgroundColor: color, color: color}, 1000)
+  }
+
   return (
-    <div className='App' style={{backgroundColor: color, color: color}}>
+    <div className='App' id='App'>
       <Wrapper 
-      color={color} />
+      color={color}
+      body={changeColorBody} />
     </div>
   );
 }

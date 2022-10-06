@@ -1,8 +1,8 @@
 import '../stylesheets/QuoteText.scss'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaQuoteLeft, FaTwitter } from "react-icons/fa";
 
-export function QuoteText({ color }) {
+export function QuoteText({ color, body }) {
 
   let quotes = [
     {
@@ -321,6 +321,34 @@ export function QuoteText({ color }) {
 
   const [currentQuote, setCurrentQuote] = useState({quote: randomQuote.quote, author: randomQuote.author});
 
+  useEffect(()=> {
+    let text = document.getElementById('quote-text');
+    text.animate({ opacity: 0}, 500, function() {
+      this.animate({ opacity: 1}, 500)
+    });
+    let author = document.getElementById('quote-author');
+    author.animate({ opacity: 0}, 500, function() {
+      this.animate({ opacity: 1}, 500)
+    });
+  })
+
+  function changeColorButton() {
+    let newQuote = document.getElementById('new-quote');
+    newQuote.animate({backgroundColor:  color}, 1000)
+  }
+
+  function changeColorTweet() {
+    let tweet = document.getElementById('tweet-quote');
+    tweet.animate({backgroundColor: color}, 1000)
+  }
+
+  function change() {
+    setCurrentQuote({quote: randomQuote.quote, author: randomQuote.author});
+    changeColorButton()
+    changeColorTweet()
+    body()
+  }
+
   return (
     <>
       <div id='quote-text' className='quote-text'>
@@ -337,14 +365,13 @@ export function QuoteText({ color }) {
           title="Tweet this quote!"
           target="_blank"
           rel="noreferrer"
-          style={{ backgroundColor: color }}
           href={'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' +
             encodeURIComponent('"' + currentQuote.quote + '" ' + currentQuote.author)}
         >
           <FaTwitter />
         </a>
-        <button className="button" id="new-quote" style={{ backgroundColor: color }} onClick={()=>setCurrentQuote({quote: randomQuote.quote, author: randomQuote.author})}>New quote</button>
+        <button className="button" id="new-quote" onClick={()=>change()}>New quote</button>
       </div>
     </>
   )
-} 
+}
