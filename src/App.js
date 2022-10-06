@@ -1,5 +1,5 @@
 import './App.scss';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Wrapper } from './components/Wrapper'
 
 
@@ -24,7 +24,7 @@ function App() {
 
   function changeColorBody() {
     let body = document.getElementById('App');
-    body.animate({backgroundColor: color, color: color}, 1000)
+    body.animate([{backgroundColor: color, color: color}], 1000)
   }
 
   return (
